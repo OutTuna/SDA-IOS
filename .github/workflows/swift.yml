@@ -24,7 +24,7 @@ jobs:
           options:
             bundleIdPrefix: com.github.sdaios
             deploymentTarget:
-              iOS: 15.0
+              iOS: 17.0
           targets:
             SDA-IOS:
               type: application
