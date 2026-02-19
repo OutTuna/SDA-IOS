@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var showLoginSheet = false
     @State private var isLoggedIn = false
     @State private var cookies: [HTTPCookie] = []
+    @State private var showTradeConfirmations = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -51,6 +52,11 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showLoginSheet) {
                 SteamLoginViewWrapper(isPresented: $showLoginSheet, isLoggedIn: $isLoggedIn, cookies: $cookies)
+            }
+            .sheet(isPresented: $showTradeConfirmations) {
+                if let account = selectedAccount {
+                    TradeConfirmationsView(tradeManager: tradeManager, account: account, cookies: cookies)
+                }
             }
             .alert(isPresented: $showDeleteAlert) {
                 Alert(
@@ -132,15 +138,15 @@ struct ContentView: View {
                         .padding().background(Color.gray.opacity(0.3)).cornerRadius(10)
                 }
                 
-                // КНОПКА ЗАГЛУШКА (SOON)
-                Button(action: {}) {
-                    Label("Трейды (Soon)", systemImage: "arrow.left.arrow.right")
+                // КНОПКА ТРЕЙДОВ
+                Button(action: { showTradeConfirmations = true }) {
+                    Label("Трейды", systemImage: "arrow.left.arrow.right")
                         .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .foregroundColor(.gray)
+                        .background(isLoggedIn ? Color.blue.opacity(0.3) : Color.gray.opacity(0.2))
+                        .foregroundColor(isLoggedIn ? .blue : .gray)
                         .cornerRadius(10)
                 }
-                .disabled(true)
+                .disabled(!isLoggedIn)
             }
             .padding(.top, 10)
         }

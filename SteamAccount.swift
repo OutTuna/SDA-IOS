@@ -25,6 +25,15 @@ struct SteamAccount: Identifiable, Decodable, Hashable {
         let SteamID: UInt64?
     }
     
+    init(shared_secret: String, identity_secret: String?, account_name: String, device_id: String?, steamid: String?, filename: String? = nil) {
+        self.shared_secret = shared_secret
+        self.identity_secret = identity_secret
+        self.account_name = account_name
+        self.device_id = device_id
+        self.steamid = steamid
+        self.filename = filename
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
