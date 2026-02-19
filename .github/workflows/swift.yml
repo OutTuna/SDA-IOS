@@ -1,0 +1,56 @@
+name: Build iOS App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Create Xcode project
+        run: |
+          cat > project.yml << 'EOF'
+          name: SDA-IOS
+          options:
+            bundleIdPrefix: com.github.sdaios
+            deploymentTarget:
+              iOS: 15.0
+          targets:
+            SDA-IOS:
+              type: application
+              platform: iOS
+              sources:
+                - path: .
+                  excludes:
+                    - ".github/**"
+                    - "*.yml"
+              settings:
+                PRODUCT_BUNDLE_IDENTIFIER: com.github.sdaios
+                SWIFT_VERSION: 5.0
+          EOF
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build app
+        run: |
+          xcodebuild \
+            -project SDA-IOS.xcodeproj \
+            -scheme SDA-IOS \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -configuration Debug \
+            build \
+            CODE_SIGNING_ALLOWED=NO
