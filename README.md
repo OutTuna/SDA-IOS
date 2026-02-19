@@ -9,6 +9,7 @@
 ![Platform](https://img.shields.io/badge/Platform-iOS-blue.svg)
 ![Swift](https://img.shields.io/badge/Language-SwiftUI-orange.svg)
 ![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)
+![Build](https://github.com/OutTuna/SDA-IOS/actions/workflows/main.yml/badge.svg)
 
 **Нативный iOS клиент для файлов Steam Desktop Authenticator (SDA).**
 Приложение позволяет использовать файлы `.maFile` на iPhone для генерации кодов двухфакторной аутентификации (2FA), без необходимости перепривязывать аутентификатор к официальному приложению Steam.
