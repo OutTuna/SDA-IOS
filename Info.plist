@@ -2,7 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Для защиты ваших Steam аккаунтов</string>
 	<key>UIFileSharingEnabled</key>
-	<true/>
+	<string></string>
 </dict>
 </plist>

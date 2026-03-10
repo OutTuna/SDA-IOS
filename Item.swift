@@ -1,9 +1,3 @@
-//
-//  Item.swift
-//  SDA-IOS
-//
-//
-
 import Foundation
 import SwiftData
 
